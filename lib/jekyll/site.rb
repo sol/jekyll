@@ -201,7 +201,11 @@ module Jekyll
       end
 
       self.pages.each do |page|
-        page.render(self.layouts, payload)
+        begin
+          page.render(self.layouts, payload)
+        rescue Exception => err
+          puts err
+        end
       end
 
       self.categories.values.map { |ps| ps.sort! { |a, b| b <=> a } }
